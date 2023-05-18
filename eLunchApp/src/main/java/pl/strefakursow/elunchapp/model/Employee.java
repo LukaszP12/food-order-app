@@ -35,7 +35,7 @@ public class Employee {
 
     @NotNull
     @Embedded
-    private LoginData loginData;
+    private LogginData loginData;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -57,11 +57,11 @@ public class Employee {
         this.personalData = personalData;
     }
 
-    public LoginData getLoginData() {
+    public LogginData getLoginData() {
         return loginData;
     }
 
-    public void setLoginData(LoginData loginData) {
+    public void setLoginData(LogginData loginData) {
         this.loginData = loginData;
     }
 

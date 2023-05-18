@@ -8,19 +8,22 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import pl.strefakursow.elunchapp.model.enums.DiscountUnit;
+import jakarta.validation.constraints.Size;
+import pl.strefakursow.elunchapp.model.enums.VatTax;
 
-import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class DiscountCode {
+@Table(name = "menuItem")
+public class MenuItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,24 +34,31 @@ public class DiscountCode {
     private UUID uuid;
 
     @NotBlank
-    private String code;
+    private String name;
 
     @Column(scale = 2, precision = 12)
     @Digits(integer = 10, fraction = 2)
     @Min(0)
     @NotNull
-    private BigDecimal discount; // 152.25
+    private BigDecimal nettoPrice;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private DiscountUnit discountUnit;
+    private VatTax vatTax;
 
-    @Nullable
-    @ManyToMany(mappedBy = "discountCodes")
-    private List<User> users;
+    @Column(scale = 2, precision = 12)
+    @Digits(integer = 10, fraction = 2)
+    @Min(0)
+    @NotNull
+    private BigDecimal bruttoPrice;
 
-    @Nullable
+    @NotNull
+    @Size(min = 1)
     @ManyToMany
+    private List<Dish> dishes;
+
+    @NotNull
+    @ManyToOne
     private List<Restaurant> restaurants;
 
     public Long getId() {
@@ -67,45 +77,51 @@ public class DiscountCode {
         this.uuid = uuid;
     }
 
-    public String getCode() {
-        return code;
+    public String getName() {
+        return name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public BigDecimal getDiscount() {
-        return discount;
+    public BigDecimal getNettoPrice() {
+        return nettoPrice;
     }
 
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
+    public void setNettoPrice(BigDecimal nettoPrice) {
+        this.nettoPrice = nettoPrice;
     }
 
-    public DiscountUnit getDiscountUnit() {
-        return discountUnit;
+    public VatTax getVatTax() {
+        return vatTax;
     }
 
-    public void setDiscountUnit(DiscountUnit discountUnit) {
-        this.discountUnit = discountUnit;
+    public void setVatTax(VatTax vatTax) {
+        this.vatTax = vatTax;
     }
 
-    @Nullable
-    public List<User> getUsers() {
-        return users;
+    public BigDecimal getBruttoPrice() {
+        return bruttoPrice;
     }
 
-    public void setUsers(@Nullable List<User> users) {
-        this.users = users;
+    public void setBruttoPrice(BigDecimal bruttoPrice) {
+        this.bruttoPrice = bruttoPrice;
     }
 
-    @Nullable
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }
 
-    public void setRestaurants(@Nullable List<Restaurant> restaurants) {
+    public void setRestaurants(List<Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
 }
