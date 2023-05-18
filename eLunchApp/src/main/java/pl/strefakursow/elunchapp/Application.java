@@ -1,4 +1,4 @@
-package pl.strefakursow;
+package pl.strefakursow.elunchapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

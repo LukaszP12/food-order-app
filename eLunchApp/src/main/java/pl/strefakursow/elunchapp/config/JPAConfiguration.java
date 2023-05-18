@@ -1,4 +1,4 @@
-package pl.strefakursow.config;
+package pl.strefakursow.elunchapp.config;
 
 import com.google.common.collect.ImmutableMap;
 import jakarta.persistence.EntityManager;
