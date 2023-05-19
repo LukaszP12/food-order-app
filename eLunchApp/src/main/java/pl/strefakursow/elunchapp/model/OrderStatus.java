@@ -2,10 +2,11 @@ package pl.strefakursow.elunchapp.model;
 
 
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 import java.time.Instant;
 
-
+@GeneratePojoBuilder
 public class OrderStatus {
 
     @NotNull

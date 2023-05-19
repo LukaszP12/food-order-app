@@ -1,11 +1,13 @@
 package pl.strefakursow.elunchapp.model;
 
 import jakarta.persistence.Embeddable;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.validator.PeriodTimeConstraint;
 
 import javax.annotation.Nullable;
 import java.time.LocalTime;
 
+@GeneratePojoBuilder
 @PeriodTimeConstraint
 @Embeddable
 public class PeriodTime {

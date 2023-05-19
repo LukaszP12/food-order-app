@@ -8,9 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 import java.util.UUID;
 
+@GeneratePojoBuilder
 @Entity
 public class OrderItem {
 

@@ -12,12 +12,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.model.enums.Archive;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
+@GeneratePojoBuilder
 @Entity
 public class User {
 

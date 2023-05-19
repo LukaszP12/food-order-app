@@ -9,12 +9,14 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 import javax.annotation.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
+@GeneratePojoBuilder
 @Entity
 public class Dish {
 
