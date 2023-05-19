@@ -48,7 +48,7 @@ public class DiscountCode {
     private List<User> users;
 
     @Nullable
-    @ManyToMany
+    @ManyToMany(mappedBy = "discountCodes")
     private List<Restaurant> restaurants;
 
     public Long getId() {

@@ -5,18 +5,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Dish {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,17 +25,16 @@ public class Dish {
     @NotNull
     private UUID uuid;
 
-    @NotNull
-    @Min(1)
-    private Integer quantity;
+    @NotBlank
+    private String name;
 
     @NotNull
-    @OneToOne
-    private Product product;
+    @OneToMany
+    private List<Ingredient> ingredients;
 
     @Nullable
-    @ManyToMany(mappedBy = "dishes")
-    private List<MenuItem> menuItems;
+    @OneToOne
+    private Dish dish;
 
     public Long getId() {
         return id;
@@ -54,28 +52,28 @@ public class Dish {
         this.uuid = uuid;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public String getName() {
+        return name;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Nullable
-    public List<MenuItem> getMenuItems() {
-        return menuItems;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setMenuItems(@Nullable List<MenuItem> menuItems) {
-        this.menuItems = menuItems;
+    public void setDish(@Nullable Dish dish) {
+        this.dish = dish;
     }
 }

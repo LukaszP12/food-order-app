@@ -59,7 +59,7 @@ public class MenuItem {
 
     @NotNull
     @ManyToOne
-    private List<Restaurant> restaurants;
+    private Restaurant restaurant;
 
     public Long getId() {
         return id;
@@ -117,11 +117,11 @@ public class MenuItem {
         this.dishes = dishes;
     }
 
-    public List<Restaurant> getRestaurants() {
-        return restaurants;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setRestaurants(List<Restaurant> restaurants) {
-        this.restaurants = restaurants;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

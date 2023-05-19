@@ -50,7 +50,7 @@ public class User {
     private List<OperationEvidence> operationEvidences;
 
     @Nullable
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "users")
     private List<DiscountCode> discountCodes;
 
     @NotNull
