@@ -24,4 +24,21 @@ public class MyTest {
         Assertions.assertEquals(testAddressDto, testAddressDtobuilded);
     }
 
+    @Test
+    void test2() {
+        TestAddressDto testAddressDto = new TestAddressDto();
+        testAddressDto.setCity("Warszawa");
+        testAddressDto.setStreet("Jana Pawła");
+        testAddressDto.setStreetNumber("25");
+        
+        TestAddressDto testAddressDtoBuilded = new TestAddressDto
+                .Builder()
+                .setCity("Warszawa")
+                .setStreet("Jana Pawła")
+                .setStreetNumber("20")
+                .build();
+
+        Assertions.assertEquals(testAddressDto, testAddressDtoBuilded);
+    }
+
 }

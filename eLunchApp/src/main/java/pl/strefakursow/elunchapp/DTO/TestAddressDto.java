@@ -1,8 +1,11 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import net.karneim.pojobuilder.GeneratePojoBuilder;
+
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+@GeneratePojoBuilder
 public class TestAddressDto {
 
     private String street;
