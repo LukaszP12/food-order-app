@@ -30,7 +30,7 @@ public class MyTest {
         testAddressDto.setCity("Warszawa");
         testAddressDto.setStreet("Jana Pawła");
         testAddressDto.setStreetNumber("25");
-        
+
         TestAddressDto testAddressDtoBuilded = new TestAddressDto
                 .Builder()
                 .setCity("Warszawa")

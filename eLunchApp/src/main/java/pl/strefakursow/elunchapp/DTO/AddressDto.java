@@ -2,10 +2,12 @@ package pl.strefakursow.elunchapp.DTO;
 
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 import javax.annotation.Nullable;
 
 @Embeddable
+@GeneratePojoBuilder
 public class AddressDto {
 
     @NotNull

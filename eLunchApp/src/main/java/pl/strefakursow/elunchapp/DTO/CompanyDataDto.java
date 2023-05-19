@@ -3,8 +3,10 @@ package pl.strefakursow.elunchapp.DTO;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 @Embeddable
+@GeneratePojoBuilder
 public class CompanyDataDto {
 
     @NotNull

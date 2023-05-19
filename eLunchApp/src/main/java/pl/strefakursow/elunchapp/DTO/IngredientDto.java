@@ -2,9 +2,11 @@ package pl.strefakursow.elunchapp.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 import java.util.UUID;
 
+@GeneratePojoBuilder
 public class IngredientDto {
 
     @NotNull

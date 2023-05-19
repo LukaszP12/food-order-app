@@ -3,8 +3,10 @@ package pl.strefakursow.elunchapp.DTO;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 @Embeddable
+@GeneratePojoBuilder
 public class LogginDataDto {
 
     @Size(min = 3)

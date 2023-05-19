@@ -1,30 +1,16 @@
 package pl.strefakursow.elunchapp.DTO;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
-import pl.strefakursow.elunchapp.model.DeliveryAddress;
-import pl.strefakursow.elunchapp.model.DiscountCode;
-import pl.strefakursow.elunchapp.model.LogginData;
-import pl.strefakursow.elunchapp.model.OperationEvidence;
-import pl.strefakursow.elunchapp.model.Order;
-import pl.strefakursow.elunchapp.model.PersonalData;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.model.enums.Archive;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
-@Entity
+@GeneratePojoBuilder
 public class UserDTO {
 
     @NotNull

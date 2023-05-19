@@ -1,10 +1,12 @@
 package pl.strefakursow.elunchapp.DTO;
 
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.model.User;
 
 import javax.annotation.Nullable;
 
+@GeneratePojoBuilder
 public class DeliveryAddressDto {
 
     @Nullable

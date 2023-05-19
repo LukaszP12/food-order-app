@@ -1,9 +1,12 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import net.karneim.pojobuilder.GeneratePojoBuilder;
+
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
+@GeneratePojoBuilder
 public class DelivererDto extends EmployeeDto {
 
     private UUID uuid;

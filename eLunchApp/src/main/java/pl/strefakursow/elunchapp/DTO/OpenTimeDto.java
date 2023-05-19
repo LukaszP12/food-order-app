@@ -3,8 +3,10 @@ package pl.strefakursow.elunchapp.DTO;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.model.enums.DayOfWeek;
 
+@GeneratePojoBuilder
 public class OpenTimeDto {
 
     @NotNull

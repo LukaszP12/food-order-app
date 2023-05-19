@@ -2,7 +2,9 @@ package pl.strefakursow.elunchapp.DTO;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
+@GeneratePojoBuilder
 public class OrderItemDto {
 
     @NotNull

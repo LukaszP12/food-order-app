@@ -2,10 +2,12 @@ package pl.strefakursow.elunchapp.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
+@GeneratePojoBuilder
 public class ProductDto {
 
     @NotBlank
