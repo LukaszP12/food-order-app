@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.model.enums.DiscountUnit;
 
 import javax.annotation.Nullable;
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+@GeneratePojoBuilder
 @Entity
 public class DiscountCode {
 
@@ -48,7 +50,7 @@ public class DiscountCode {
     private List<User> users;
 
     @Nullable
-    @ManyToMany
+    @ManyToMany(mappedBy = "discountCodes")
     private List<Restaurant> restaurants;
 
     public Long getId() {
