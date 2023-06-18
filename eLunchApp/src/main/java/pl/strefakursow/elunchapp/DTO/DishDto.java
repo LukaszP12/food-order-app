@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
 import org.checkerframework.framework.qual.NoDefaultQualifierForUse;
 
@@ -24,6 +25,7 @@ public class DishDto {
         public interface Basic { }
         public interface Extended extends Basic { }
     }
+    public interface DataUpdateValidation {}
 
     @JsonView(View.Basic.class)
     @NotNull
@@ -40,6 +42,7 @@ public class DishDto {
 
     @JsonView(View.Extended.class)
     @Nullable
+    @Null(groups = DataUpdateValidation.class)
     private List<MenuItemDto> menuItemDtos;
 
     public Integer getQuantity() {

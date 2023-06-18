@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
-import pl.strefakursow.elunchapp.model.User;
 import pl.strefakursow.elunchapp.model.enums.DiscountUnit;
 
 import javax.annotation.Nullable;
@@ -47,7 +46,7 @@ public class DiscountCodeDto {
     @JsonView(View.Basic.class)
     @NotNull
     @Embedded
-    private PeriodDto period;
+    private PeriodDTO period;
 
     @JsonView(View.Extended.class)
     @Nullable

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.constraints.NotNull;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
 
+import javax.annotation.Nullable;
 import java.time.Instant;
 
 @GeneratePojoBuilder
@@ -13,6 +14,8 @@ public class OrderStatusDto {
     public static class View {
         public interface Basic { }
     }
+    public interface GiveOutStatusValidation {}
+    public interface DeliveryValidation {}
 
     @JsonView(View.Basic.class)
     @NotNull
@@ -23,11 +26,13 @@ public class OrderStatusDto {
     private Boolean isPaid;
 
     @JsonView(View.Basic.class)
-    @NotNull
+    @NotNull(groups = GiveOutStatusValidation.class)
+    @Nullable
     private Instant giveOutTime;
 
     @JsonView(View.Basic.class)
-    @NotNull
+    @NotNull(groups = DeliveryValidation.class)
+    @Nullable
     private Instant deliveryTime;
 
     public Instant getOrderTime() {

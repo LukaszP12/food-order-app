@@ -10,6 +10,11 @@ import java.util.List;
 @GeneratePojoBuilder
 public class ProductDto {
 
+    public static class View {
+        public interface Basic { }
+        public interface Extended extends ProductDto.View.Basic { }
+    }
+
     @NotBlank
     private String name;
 

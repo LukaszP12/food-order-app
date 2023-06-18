@@ -10,7 +10,12 @@ import java.time.LocalDateTime;
 @PeriodConstraint
 @Embeddable
 @GeneratePojoBuilder
-public class PeriodDto {
+public class PeriodDTO {
+
+    public static class View {
+        public interface Basic { }
+        public interface Extended extends PeriodDTO.View.Basic { }
+    }
 
     @Nullable
     private LocalDateTime begin;

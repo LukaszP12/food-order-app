@@ -1,10 +1,13 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Size;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.model.enums.Archive;
 
@@ -16,31 +19,43 @@ import java.util.UUID;
 public class UserDTO {
 
     public static class View {
-        public interface Basic {}
-        public interface Extended extends RestaurantDto.View.Basic { }
+        public interface Id {}
+        public interface Basic extends Id {}
+        public interface Extended extends Basic { }
     }
+    public interface DataUpdateValidation {}
+    public interface NewOperationValidation {}
 
-    @JsonView(View.Basic.class)
+    @JsonView(View.Id.class)
     @NotNull
     private UUID uuid;
 
+    @JsonView(View.Basic.class)
     @NotNull
     @Embedded
     private PersonalDataDto personalData;
 
+    @JsonView(View.Extended.class)
     @Nullable
-    private List<DeliveryAddressDto> addresses;
+    private List<DeliveryAddressDto> deliveryAddress;
 
+    @JsonView(View.Extended.class)
     @NotNull
     @Embedded
     private LogginDataDto logginData;
 
+    @JsonIgnore
     @Nullable
+    @Null(groups = DataUpdateValidation.class)
     private List<OrderDto> orders;
 
+    @JsonView(View.Extended.class)
     @NotNull
+    @Size(max = 0,groups = DataUpdateValidation.class)
+    @Size(min = 1,max = 1,groups = NewOperationValidation.class)
     private List<OperationEvidenceDto> operationEvidences;
 
+    @JsonView(View.Extended.class)
     @Nullable
     private List<DiscountCodeDto> discountCodes;
 
@@ -58,11 +73,11 @@ public class UserDTO {
 
     @Nullable
     public List<DeliveryAddressDto> getAddresses() {
-        return addresses;
+        return deliveryAddress;
     }
 
     public void setAddresses(@Nullable List<DeliveryAddressDto> addresses) {
-        this.addresses = addresses;
+        this.deliveryAddress = addresses;
     }
 
     public LogginDataDto getLogginData() {
