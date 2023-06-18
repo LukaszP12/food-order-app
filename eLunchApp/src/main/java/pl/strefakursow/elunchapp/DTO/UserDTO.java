@@ -1,5 +1,6 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,9 +10,19 @@ import pl.strefakursow.elunchapp.model.enums.Archive;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 
 @GeneratePojoBuilder
 public class UserDTO {
+
+    public static class View {
+        public interface Basic {}
+        public interface Extended extends RestaurantDto.View.Basic { }
+    }
+
+    @JsonView(View.Basic.class)
+    @NotNull
+    private UUID uuid;
 
     @NotNull
     @Embedded

@@ -1,5 +1,6 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Embeddable;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.validator.PeriodTimeConstraint;
@@ -12,9 +13,15 @@ import java.time.LocalTime;
 @GeneratePojoBuilder
 public class PeriodTimeDto {
 
+    public static class View {
+        public interface Basic { }
+    }
+
+    @JsonView(View.Basic.class)
     @Nullable
     private LocalTime begin;
 
+    @JsonView(View.Basic.class)
     @Nullable
     private LocalTime end;
 

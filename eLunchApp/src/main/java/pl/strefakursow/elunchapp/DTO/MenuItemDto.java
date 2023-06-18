@@ -1,5 +1,6 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToMany;
@@ -13,32 +14,48 @@ import pl.strefakursow.elunchapp.model.enums.VatTax;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @GeneratePojoBuilder
 public class MenuItemDto {
 
+    public static class View {
+        public interface Basic { }
+        public interface Extended extends Basic { }
+    }
+
+    @JsonView(View.Basic.class)
+    @NotNull
+    private UUID uuid;
+
+    @JsonView(View.Basic.class)
     @NotBlank
     private String name;
 
+    @JsonView(View.Extended.class)
     @Digits(integer = 10, fraction = 2)
     @Min(0)
     @NotNull
     private BigDecimal nettoPrice;
 
+    @JsonView(View.Extended.class)
     @NotNull
     @Enumerated(EnumType.STRING)
     private VatTax vatTax;
 
+    @JsonView(View.Extended.class)
     @Digits(integer = 10, fraction = 2)
     @Min(0)
     @NotNull
     private BigDecimal bruttoPrice;
 
+    @JsonView(View.Extended.class)
     @NotNull
     @Size(min = 1)
     @ManyToMany
     private List<DishDto> dishDtos;
 
+    @JsonView(View.Extended.class)
     @NotNull
     private RestaurantDto restaurantDto;
 

@@ -97,7 +97,8 @@ public class TestAddressDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TestAddressDto that = (TestAddressDto) o;
-        return Objects.equals(street, that.street) && Objects.equals(streetNumber, that.streetNumber) && Objects.equals(localNumber, that.localNumber) && Objects.equals(city, that.city) && Objects.equals(borough, that.borough) && Objects.equals(county, that.county) && Objects.equals(state, that.state);
+//        return Objects.equals(street, that.street) && Objects.equals(streetNumber, that.streetNumber) && Objects.equals(localNumber, that.localNumber) && Objects.equals(city, that.city) && Objects.equals(borough, that.borough) && Objects.equals(county, that.county) && Objects.equals(state, that.state);
+        return Objects.equals(city, that.city) && Objects.equals(street, that.street) && Objects.equals(streetNumber, that.streetNumber);
     }
 
     @Override

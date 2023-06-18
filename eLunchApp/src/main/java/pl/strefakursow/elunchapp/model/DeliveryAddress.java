@@ -37,6 +37,9 @@ public class DeliveryAddress {
     private String localNumber;
 
     @NotNull
+    private String postcode;
+
+    @NotNull
     private String city;
 
     @NotNull
@@ -124,5 +127,13 @@ public class DeliveryAddress {
 
     public void setState(@Nullable String state) {
         this.state = state;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 }

@@ -1,5 +1,7 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Digits;
@@ -13,25 +15,45 @@ import pl.strefakursow.elunchapp.model.enums.DiscountUnit;
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @GeneratePojoBuilder
 public class DiscountCodeDto {
 
+    public static class View {
+        public interface Basic { }
+        public interface Extended extends Basic { }
+    }
+
+    @JsonView(View.Basic.class)
+    @NotNull
+    private UUID uuid;
+
+    @JsonView(View.Basic.class)
     @NotBlank
     private String code;
 
+    @JsonView(View.Extended.class)
     @Digits(integer = 10, fraction = 2)
     @Min(0)
     @NotNull
     private BigDecimal discount; // 152.25
 
+    @JsonView(View.Extended.class)
     @NotNull
     @Enumerated(EnumType.STRING)
     private DiscountUnit discountUnit;
 
-    @Nullable
-    private List<User> users;
+    @JsonView(View.Basic.class)
+    @NotNull
+    @Embedded
+    private PeriodDto period;
 
+    @JsonView(View.Extended.class)
+    @Nullable
+    private List<UserDTO> users;
+
+    @JsonView(View.Extended.class)
     @Nullable
     private List<RestaurantDto> restaurantDtos;
 
@@ -60,11 +82,11 @@ public class DiscountCodeDto {
     }
 
     @Nullable
-    public List<User> getUsers() {
+    public List<UserDTO> getUsers() {
         return users;
     }
 
-    public void setUsers(@Nullable List<User> users) {
+    public void setUsers(@Nullable List<UserDTO> users) {
         this.users = users;
     }
 

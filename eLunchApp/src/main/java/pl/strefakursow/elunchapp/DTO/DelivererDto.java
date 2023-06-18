@@ -1,5 +1,6 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 import javax.annotation.Nullable;
@@ -9,26 +10,22 @@ import java.util.UUID;
 @GeneratePojoBuilder
 public class DelivererDto extends EmployeeDto {
 
-    private UUID uuid;
+    public static class View {
+        public interface Id extends EmployeeDto.View.Id {}
+        public interface Basic extends EmployeeDto.View.Basic { }
+        public interface Extended extends Basic, EmployeeDto.View.Extended { }
+    }
 
+    @JsonView(View.Extended.class)
     @Nullable
     private List<OrderDto> orderDtos;
 
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
     @Nullable
-    public List<OrderDto> getOrderDtos() {
+    public List<OrderDto> getOrders() {
         return orderDtos;
     }
 
     public void setOrderDtos(@Nullable List<OrderDto> orderDtos) {
         this.orderDtos = orderDtos;
     }
-
 }

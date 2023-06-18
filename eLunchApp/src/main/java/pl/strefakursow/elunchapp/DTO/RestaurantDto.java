@@ -1,18 +1,31 @@
 package pl.strefakursow.elunchapp.DTO;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.model.enums.Archive;
 
 import java.util.List;
+import java.util.UUID;
 
 @GeneratePojoBuilder
 public class RestaurantDto {
 
+    public static class View {
+        public interface Basic {}
+        public interface Extended extends Basic { }
+    }
+
+    @JsonView(View.Basic.class)
+    @NotNull
+    private UUID uuid;
+
+    @NotBlank
     private String name;
 
     @NotNull

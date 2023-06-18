@@ -1,6 +1,7 @@
 package pl.strefakursow.elunchapp.DTO;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.constraints.NotNull;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
 
@@ -9,15 +10,23 @@ import java.time.Instant;
 @GeneratePojoBuilder
 public class OrderStatusDto {
 
+    public static class View {
+        public interface Basic { }
+    }
+
+    @JsonView(View.Basic.class)
     @NotNull
     private Instant orderTime;
 
+    @JsonView(View.Basic.class)
     @NotNull
     private Boolean isPaid;
 
+    @JsonView(View.Basic.class)
     @NotNull
     private Instant giveOutTime;
 
+    @JsonView(View.Basic.class)
     @NotNull
     private Instant deliveryTime;
 
