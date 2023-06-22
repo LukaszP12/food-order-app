@@ -11,6 +11,7 @@ import pl.strefakursow.elunchapp.repo.UserRepo;
 import pl.strefakursow.elunchapp.utils.ConverterUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -51,6 +52,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void validateNewOperation(UUID uuid, UserDTO userDTO) {
+        if (!Objects.equals(userDTO.getUuid(), uuid)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
 
+        userRepo.findByUuid(userDTO.getUuid())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }

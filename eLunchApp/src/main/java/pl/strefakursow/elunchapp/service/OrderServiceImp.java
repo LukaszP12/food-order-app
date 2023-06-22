@@ -74,22 +74,43 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public void setIsPaid(OrderDto orderDto) {
+        Order order = orderRepo.findByUuid(orderDto.getUuid())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+        if (!order.getOrderStatus().getIsPaid()) {
+            order.getOrderStatus().setIsPaid(true);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public void setIsGivenOut(UUID uuid, OrderStatusDto orderStatusDto) {
+        Order order = orderRepo.findByUuid(uuid)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (!order.getOrderStatus().getIsPaid() || orderStatusDto.getDeliveryTime() != null) {
+            new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        order.getOrderStatus().setGiveOutTime(orderStatusDto.getGiveOutTime());
+    }
+
+    @Override
+    public void setIsDelivered(UUID uuid, OrderStatusDto orderStatusDto) {
+        Order order = orderRepo.findByUuid(uuid)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (!order.getOrderStatus().getIsPaid() || order.getOrderStatus().getGiveOutTime() == null) {
+            new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        order.getOrderStatus().setDeliveryTime(orderStatusDto.getDeliveryTime());
     }
 
     @Override
     public UserDTO newOperationForPaidOrder(OrderDto orderDto) {
         return null;
-    }
-
-    @Override
-    public void setIsDelivered(OrderDto orderDto, OrderStatusDto orderStatusDto) {
-
-    }
-
-    @Override
-    public void setIsGivenOut(OrderDto orderDto, OrderStatusDto orderStatusDto) {
-
     }
 
 }

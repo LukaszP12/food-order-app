@@ -19,9 +19,9 @@ public interface OrderService {
 
     void setIsPaid(OrderDto orderDto);
 
-    void setIsDelivered(OrderDto orderDto, OrderStatusDto orderStatusDto);
+    void setIsGivenOut(UUID uuid, OrderStatusDto orderStatusDto);
 
-    void setIsGivenOut(OrderDto orderDto, OrderStatusDto orderStatusDto);
+    void setIsDelivered(UUID uuid, OrderStatusDto orderStatusDto);
 
     UserDTO newOperationForPaidOrder(OrderDto orderDto);
 }
