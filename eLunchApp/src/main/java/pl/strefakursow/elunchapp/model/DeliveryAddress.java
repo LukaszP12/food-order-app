@@ -7,10 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
+@GeneratePojoBuilder
 @Entity
 public class DeliveryAddress {
 
@@ -33,6 +35,9 @@ public class DeliveryAddress {
 
     @NotNull
     private String localNumber;
+
+    @NotNull
+    private String postcode;
 
     @NotNull
     private String city;
@@ -122,5 +127,13 @@ public class DeliveryAddress {
 
     public void setState(@Nullable String state) {
         this.state = state;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 }

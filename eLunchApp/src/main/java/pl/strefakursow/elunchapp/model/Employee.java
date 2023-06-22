@@ -12,10 +12,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.validation.constraints.NotNull;
+import net.karneim.pojobuilder.GeneratePojoBuilder;
 import pl.strefakursow.elunchapp.model.enums.Archive;
 
 import java.util.UUID;
 
+@GeneratePojoBuilder
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("employee")
