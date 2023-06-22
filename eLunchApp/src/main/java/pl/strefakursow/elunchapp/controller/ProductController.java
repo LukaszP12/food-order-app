@@ -25,6 +25,7 @@ import pl.strefakursow.elunchapp.service.ProductService;
 import pl.strefakursow.elunchapp.service.UserService;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import javax.validation.groups.Default;
 import java.util.List;
 import java.util.UUID;
@@ -54,7 +55,7 @@ public class ProductController {
 
     @Transactional
     @PutMapping("/{uuid}")
-    public void put(@PathVariable UUID uuid, @RequestBody ProductDto userDTO) {
+    public void put(@PathVariable UUID uuid, @RequestBody @Valid ProductDto userDTO) {
 
     }
 

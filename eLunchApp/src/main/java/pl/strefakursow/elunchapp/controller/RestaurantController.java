@@ -21,6 +21,7 @@ import pl.strefakursow.elunchapp.service.DishService;
 import pl.strefakursow.elunchapp.service.RestaurantService;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import javax.validation.groups.Default;
 import java.util.List;
 import java.util.UUID;
@@ -54,7 +55,7 @@ public class RestaurantController {
     @Transactional
     @Validated(DataUpdateValidation.class)
     @PutMapping("/{uuid}")
-    public void put(@PathVariable UUID uuid, @RequestBody RestaurantDto restaurantDto) {
+    public void put(@PathVariable UUID uuid, @RequestBody @Valid RestaurantDto restaurantDto) {
 
     }
 
