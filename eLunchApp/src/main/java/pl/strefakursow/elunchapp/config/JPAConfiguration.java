@@ -19,14 +19,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories("pl.strefakursow.eLunchApp.repo")
+@EnableJpaRepositories("pl.strefakursow.elunchapp.repo")
 @EnableTransactionManagement
 public class JPAConfiguration {
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/?user=root");
+        dataSourceBuilder.url("jdbc:mysql://localhost:3306/elunchapp?useUnicode=true&characterEncoding=utf8&" +
+                "useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
         dataSourceBuilder.username("strefa");
         dataSourceBuilder.password("kursow");
         return dataSourceBuilder.build();
@@ -43,13 +44,14 @@ public class JPAConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, HibernateJpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource);
-        entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter());
+        entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
         entityManagerFactory.setPackagesToScan(
-                "pl.strefakursow.elunchapp.model"
+                "pl.strefakursow.elunchapp.model",
+                "pl.strefakursow.elunchapp.converter"
         );
         entityManagerFactory.setJpaPropertyMap(ImmutableMap.of(
-                AvailableSettings.DIALECT, "org.hibernate.dialect.MYSQL8Dialect",
-//                AvailableSettings.SHOW_SQL, "true",
+                AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL8Dialect",
+//			AvailableSettings.SHOW_SQL, "true",
                 AvailableSettings.HBM2DDL_AUTO, "create"
         ));
         return entityManagerFactory;
