@@ -21,6 +21,7 @@ import pl.strefakursow.elunchapp.DTO.LogginDataDto;
 import pl.strefakursow.elunchapp.DTO.OperationEvidenceDto;
 import pl.strefakursow.elunchapp.DTO.PersonalDataDto;
 import pl.strefakursow.elunchapp.DTO.UserDTO;
+import pl.strefakursow.elunchapp.events.OperationEvidenceCreator;
 import pl.strefakursow.elunchapp.model.User;
 import pl.strefakursow.elunchapp.service.UserService;
 
@@ -34,12 +35,18 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
-    interface UserListValidation extends UserDTO.View.Basic, PersonalDataDto.View.Basic {}
-    interface UserView extends UserDTO.View.Basic,PersonalDataDto.View.Extended, LogginDataDto.View.Basic,
-            DeliveryAddressDto.View.Basic, OperationEvidenceDto.View.Extended, DiscountCodeDto.View.Extended {}
+    interface UserListValidation extends UserDTO.View.Basic, PersonalDataDto.View.Basic {
+    }
 
-    interface DataUpdateValidation extends Default, UserDTO.DataUpdateValidation {}
-    interface NewOperationValidation extends Default, UserDTO.NewOperationValidation {}
+    interface UserView extends UserDTO.View.Basic, PersonalDataDto.View.Extended, LogginDataDto.View.Basic,
+            DeliveryAddressDto.View.Basic, OperationEvidenceDto.View.Extended, DiscountCodeDto.View.Extended {
+    }
+
+    interface DataUpdateValidation extends Default, UserDTO.DataUpdateValidation {
+    }
+
+    interface NewOperationValidation extends Default, UserDTO.NewOperationValidation {
+    }
 
     private final UserService userService;
     private final ApplicationEventPublisher applicationEventPublisher;
@@ -66,7 +73,7 @@ public class UserController {
     @Validated(DataUpdateValidation.class)
     @PutMapping("/{uuid}")
     public void put(@PathVariable UUID uuid, @RequestBody @Valid UserDTO json) {
-        userService.put(uuid,json);
+        userService.put(uuid, json);
     }
 
     @Transactional
@@ -78,13 +85,16 @@ public class UserController {
     @Transactional
     @Validated(NewOperationValidation.class)
     @PostMapping("/{uuid}/new-operation")
-    public void postOperation(@PathVariable UUID uuid, @RequestBody @Valid UserDTO json){
-        userService.validateNewOperation(uuid,json);
+    public void postOperation(@PathVariable UUID uuid, @RequestBody @Valid UserDTO json) {
+        userService.validateNewOperation(uuid, json);
+
+        OperationEvidenceCreator operationEvidenceCreator = new OperationEvidenceCreator(this, json);
+        applicationEventPublisher.publishEvent(operationEvidenceCreator);
     }
 
     @JsonView(UserView.class)
     @GetMapping("/{uuid}/delivery-address")
-    public UserDTO getUserAddresses(@PathVariable UUID uuid){
+    public List<DeliveryAddressDto> getUserAddresses(@PathVariable UUID uuid) {
 //        UserDTO userDTO = userService.getByUuid(uuid)
 //                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 //        return userDTO.getDeliveryAddress();
