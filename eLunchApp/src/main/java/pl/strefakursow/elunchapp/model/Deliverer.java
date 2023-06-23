@@ -39,4 +39,22 @@ public class Deliverer extends Employee {
     public void setOrders(@Nullable List<Order> orders) {
         this.orders = orders;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    @Override
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 }

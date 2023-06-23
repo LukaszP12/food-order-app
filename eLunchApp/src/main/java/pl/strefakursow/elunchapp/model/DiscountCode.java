@@ -13,6 +13,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
+import pl.strefakursow.elunchapp.DTO.PeriodDTO;
 import pl.strefakursow.elunchapp.model.enums.DiscountUnit;
 
 import javax.annotation.Nullable;
@@ -45,6 +46,9 @@ public class DiscountCode {
     @Enumerated(EnumType.STRING)
     private DiscountUnit discountUnit;
 
+    @NotNull
+    private PeriodDTO period;
+
     @Nullable
     @ManyToMany(mappedBy = "discountCodes")
     private List<User> users;
@@ -75,6 +79,14 @@ public class DiscountCode {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public PeriodDTO getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(PeriodDTO period) {
+        this.period = period;
     }
 
     public BigDecimal getDiscount() {

@@ -69,6 +69,8 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderTime> orderTimes;
 
+    private List<OrderItem> orderItems;
+
     @NotNull
     @ManyToOne
     private User user;
@@ -97,6 +99,14 @@ public class Order {
         this.uuid = uuid;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public BigDecimal getNettoPrice() {
         return nettoPrice;
     }
@@ -111,5 +121,71 @@ public class Order {
 
     public void setBruttoPrice(BigDecimal bruttoPrice) {
         this.bruttoPrice = bruttoPrice;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    @Nullable
+    public DiscountCode getDiscountCode() {
+        return discountCode;
+    }
+
+    public void setDiscountCode(@Nullable DiscountCode discountCode) {
+        this.discountCode = discountCode;
+    }
+
+    public BigDecimal getAmountToPayBrutto() {
+        return amountToPayBrutto;
+    }
+
+    public void setAmountToPayBrutto(BigDecimal amountToPayBrutto) {
+        this.amountToPayBrutto = amountToPayBrutto;
+    }
+
+    public List<OrderTime> getOrderTimes() {
+        return orderTimes;
+    }
+
+    public void setOrderTimes(List<OrderTime> orderTimes) {
+        this.orderTimes = orderTimes;
+    }
+
+    public Deliverer getDeliverer() {
+        return deliverer;
+    }
+
+    public void setDeliverer(Deliverer deliverer) {
+        this.deliverer = deliverer;
+    }
+
+    @Nullable
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(@Nullable String note) {
+        this.note = note;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
